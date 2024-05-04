@@ -1,0 +1,57 @@
+{
+    "cf_video_data": {
+        "allowedOrigins": [],
+        "clippedFrom": null,
+        "created": "2024-03-21T07:39:46.63394Z",
+        "creator": "20",
+        "duration": 290,
+        "input": {
+            "height": 1280,
+            "width": 720
+        },
+        "maxDurationSeconds": 14400,
+        "maxSizeBytes": null,
+        "meta": {
+            "filename": "short_10_v1.mp4",
+            "filetype": "video/mp4"
+        },
+        "modified": "2024-03-21T08:13:12.438264Z",
+        "playback": {
+            "dash": "https://customer-cu45xcinh6n1mgbb.cloudflarestream.com/0af57e97340f615d61c50ef57792e50c/manifest/video.mpd",
+            "hls": "https://customer-cu45xcinh6n1mgbb.cloudflarestream.com/0af57e97340f615d61c50ef57792e50c/manifest/video.m3u8"
+        },
+        "preview": "https://customer-cu45xcinh6n1mgbb.cloudflarestream.com/0af57e97340f615d61c50ef57792e50c/watch",
+        "publicDetails": {
+            "channel_link": "",
+            "logo": "",
+            "share_link": "",
+            "title": ""
+        },
+        "readyToStream": true,
+        "readyToStreamAt": "2024-03-21T08:13:12.437428Z",
+        "requireSignedURLs": false,
+        "scheduledDeletion": null,
+        "size": 623822990,
+        "status": {
+            "errorReasonCode": "",
+            "errorReasonText": "",
+            "pctComplete": "100.000000",
+            "state": "ready"
+        },
+        "thumbnail": "https://customer-cu45xcinh6n1mgbb.cloudflarestream.com/0af57e97340f615d61c50ef57792e50c/thumbnails/thumbnail.jpg",
+        "thumbnailTimestampPct": 0,
+        "uid": "0af57e97340f615d61c50ef57792e50c",
+        "uploadExpiry": "2024-03-22T07:39:46.63393Z",
+        "uploaded": "2024-03-21T07:39:46.633935Z",
+        "watermark": null
+    },
+    "cloudflare_uid": null,
+    "created_at": "2024-03-21T07:39:31.915507Z",
+    "id": 13,
+    "tags": [
+        "stretch",
+        "neck"
+    ],
+    "title": "Neck Stretches",
+    "updated_at": "2024-03-21T15:17:39.223956Z"
+}
