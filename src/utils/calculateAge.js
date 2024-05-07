@@ -1,7 +1,7 @@
 export function calculateAge(birthDay, birthMonth, birthYear) {
   const today = new Date();
   const currentYear = today.getUTCFullYear();
-  const currentMonth = today.getUTCMonth() + 1; // JavaScript months are 0-indexed.
+  const currentMonth = today.getUTCMonth() + 1; 
   const currentDay = today.getUTCDate();
 
   let ageYears = currentYear - birthYear;
