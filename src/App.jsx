@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { calculateAge } from "./utils/calculateAge";
 import { useState } from "react";
-import { validateInput } from "./utils/validateInput";
+import { valiDators } from "./utils/validateInput";
 
 function App() {
   const day = useRef(null);
@@ -14,7 +14,9 @@ function App() {
 
   const [isError, setIsError] = useState(false);
 
-  const [isInputsError, setIsInputError] = useState({
+  const [inputError, setInputError] = useState(false);
+
+  const [isInputErrorMsg, setIsInputErrorMsg] = useState({
     birthDay: "",
     monthsResult: "",
     yearResult: "",
@@ -33,33 +35,49 @@ function App() {
       { value: yearResult, type: "yearResult" },
     ];
 
-    for (let i = 0; i < inputs.length; i++) {
-      const res = validateInput(inputs[i].value, inputs[i].type);
-      if (res) {
-        setIsError(true);
-        setIsInputError({
-          ...isInputsError,
-          [inputs[i].type]: res,
-        });
-        console.log(res);
-        return; 
+    let isEmpty = false;
+    let containsValue = false
+    inputs.forEach((input) => {
+      if (input.value.trim() === "") {
+        isEmpty = true;
+        containsValue = false
+      } else if (input.value.split().some((data) => data.length > 0)) {
+        console.log(input.value)
+        isEmpty = false;
+        containsValue = true
       }
+    });
+
+    if (isEmpty ) {
+      setIsError(true);
+      return;
+    } else {
+      inputs.forEach((input) => {
+        const validatorFunction = valiDators[input.type];
+        if (validatorFunction(input.value)) {
+          setIsInputErrorMsg((prev) => ({
+            ...prev,
+            [input.type]: validatorFunction(input.value),
+          }));
+          console.log(validatorFunction(input.value));
+          setInputError(true);
+        }
+      });
     }
 
-    if (birthDay === "" || monthsResult === "" || yearResult === "") {
-      setIsError(!isError);
+    if (isError || inputError) {
+      return;
+    } else {
+      const {
+        years: byears,
+        months: bmonth,
+        days: bdays,
+      } = calculateAge(birthDay, monthsResult, yearResult);
+
+      setContentDay(bdays);
+      setContentMonths(bmonth);
+      setContentYear(byears);
     }
-
-
-    const {
-      years: byears,
-      months: bmonth,
-      days: bdays,
-    } = calculateAge(birthDay, monthsResult, yearResult);
-
-    setContentDay(bdays);
-    setContentMonths(bmonth);
-    setContentYear(byears);
   };
 
   return (
@@ -87,16 +105,16 @@ function App() {
                     }`}
                     placeholder="DD"
                   />
-                  {isError && isInputsError.birthDay ? (
+                  {inputError ? (
                     <span className="italic text-xs normal-case text-primary-lightRed/60">
-                      {isInputsError.birthDay}
-                    </span>
-                  ) : isError ? (
-                    <span className="italic text-xs normal-case text-primary-lightRed/60">
-                      This field is required
+                      {isInputErrorMsg.birthDay}
                     </span>
                   ) : (
-                    ""
+                    isError && (
+                      <span className="italic text-xs normal-case text-primary-lightRed/60">
+                        This field is required
+                      </span>
+                    )
                   )}
                 </li>
                 <li className="flex flex-col gap-2">
@@ -114,10 +132,16 @@ function App() {
                     }`}
                     placeholder="MM"
                   />
-                  {isError && (
+                  {inputError ? (
                     <span className="italic text-xs normal-case text-primary-lightRed/60">
-                      This field is required
+                      {isInputErrorMsg.monthsResult}
                     </span>
+                  ) : (
+                    isError && (
+                      <span className="italic text-xs normal-case text-primary-lightRed/60">
+                        This field is required
+                      </span>
+                    )
                   )}
                 </li>
                 <li className="flex flex-col gap-2">
@@ -135,10 +159,16 @@ function App() {
                     }`}
                     placeholder="YYYY"
                   />
-                  {isError && (
+                  {inputError ? (
                     <span className="italic text-xs normal-case text-primary-lightRed/60">
-                      This field is required
+                      {isInputErrorMsg.yearResult}
                     </span>
+                  ) : (
+                    isError && (
+                      <span className="italic text-xs normal-case text-primary-lightRed/60">
+                        This field is required
+                      </span>
+                    )
                   )}
                 </li>
               </ul>

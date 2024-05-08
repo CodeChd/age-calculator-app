@@ -1,15 +1,28 @@
 import { currentYear } from "./constant";
+const validDay = (inputValue) => {
+  if (Number(inputValue) > 31 || Number(inputValue) < 1) {
+    return "Must be a valid day";
+  }
+  return "";
+};
 
-export const validateInput = (inputValue, fieldType) => {
+const validMonth = (inputValue) => {
+  if (Number(inputValue) > 12 || Number(inputValue) < 1) {
+    return "Must be a valid month!";
+  }
+  return "";
+};
 
-    if (fieldType === 'birthDay' && (Number(inputValue) < 1 || Number(inputValue) > 31)) {
-      return "Must be a valid date";
-    }
-    if (fieldType === 'monthsResult' && (Number(inputValue) < 1 || Number(inputValue) > 12)) {
-      return "Must be a valid month!";
-    }
-    if (fieldType === 'yearResult' && Number(inputValue) > currentYear) {
-      return "Must be of past!";
-    }
-    return false; 
-  };
+const validYear = (inputValue) => {
+  if (Number(inputValue) > currentYear || Number(inputValue) < 1) {
+    return "Year must be in the past!";
+  }
+  return "";
+};
+
+
+export const valiDators = {
+  birthDay: validDay,
+  monthsResult: validMonth,
+  yearResult: validYear,
+};
